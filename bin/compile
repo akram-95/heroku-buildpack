@@ -60,6 +60,10 @@ build_pubspec() {
   else
     message '*** Skipping pub build because "web" folder not found'
   fi
+
+  dart pub cache clean  
+
+  message "*** clean cache"
 }
 
 export_env_dir "$3"

@@ -42,6 +42,19 @@ build_pubspec() {
 
   dart --version
 
+  dart pub cache clean  
+
+  while true; do
+    read -p "Are you sure? (y/N)?" yn
+    case $yn in
+        [Yy]* ) make install; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+  done
+
+  message "*** clean cache"
+
   #start pub from the /app folder to have correct symlink paths
   dart pub get  
   
@@ -61,9 +74,6 @@ build_pubspec() {
     message '*** Skipping pub build because "web" folder not found'
   fi
 
-  dart pub cache clean  
-
-  message "*** clean cache"
 }
 
 export_env_dir "$3"
